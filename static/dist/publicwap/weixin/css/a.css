@@ -64,8 +64,8 @@ div {
 
 @font-face {
   font-family: 'FontAwesome';
-  src: url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.eot?v=4.1.0&1416796522');
-  src: url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.eot?&1416796522#iefix&v=4.1.0') format("embedded-opentype"), url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.woff?v=4.1.0&1416796522') format("woff"), url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.ttf?v=4.1.0&1416796522') format("truetype"), url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.svg?v=4.1.0&1416796522#fontawesomeregular') format("svg");
+  src: url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.eot?v=4.1.0&1417071593');
+  src: url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.eot?&1417071593#iefix&v=4.1.0') format("embedded-opentype"), url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.woff?v=4.1.0&1417071593') format("woff"), url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.ttf?v=4.1.0&1417071593') format("truetype"), url('/static/dist/publicwap/weixin/font/../font/fontawesome-webfont.svg?v=4.1.0&1417071593#fontawesomeregular') format("svg");
   font-weight: normal;
   font-style: normal;
 }

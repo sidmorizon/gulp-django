@@ -11,7 +11,7 @@ $.extend({
     }
 });
 
-},{"jquery":undefined}],"jquery":[function(require,module,exports){
+},{"jquery":"jquery"}],"jquery":[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/

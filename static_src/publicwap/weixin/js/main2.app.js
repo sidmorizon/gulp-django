@@ -5,7 +5,7 @@
 'use strict';
 
 var aaaa = require('./bar1.js');
-var _ = require('underscore');
+var _ = require('lodash');
 
 console.log(_.max([1,3,4,44,3]));
 
