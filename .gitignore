@@ -27,7 +27,12 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# IDE configs
+# ===JetBrains WebStorm IDE configs
 .idea/
+
+# ===sass cache files
+.sass-cache/
+
+# project static files
 static_src/
 static/
