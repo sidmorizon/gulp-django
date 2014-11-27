@@ -33,6 +33,7 @@ node_modules
 # ===sass cache files
 .sass-cache/
 
-# project static files
+# django project files
 static_src/
 static/
+templates/
