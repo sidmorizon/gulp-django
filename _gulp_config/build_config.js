@@ -9,7 +9,7 @@ var html_dir = 'templates/dist';
 
 var project_root = path.dirname(__dirname);
 
-config.path_root = "/Users/zuozhuo/Workspace/Codes/medweb/";
+//config.path_root = "/Users/zuozhuo/Workspace/Codes/medweb/";
 
 // html处理
 config.html = [
@@ -28,8 +28,8 @@ config.sass = {
 
 };
 config.css_min = {
-    "src": ['static/**/*.css', '!static/**/*.min.css'],
-    "root": config.path_root
+    //"src": ['static/**/*.css', '!static/**/*.min.css'],
+    //"root": config.path_root
 };
 config.css_sprite = {
     "folder_root": [ src_dir + '/**/sass/sprite/']

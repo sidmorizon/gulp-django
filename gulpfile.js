@@ -74,9 +74,9 @@ function bundle_action(bundler, dest_file) {
         .on('error', browserifyErrorHandler)
         //通过 vinyl-source-stream 传入输入文件名
         .pipe(vinylSource(dest_file))
-        .pipe(gulp.dest('./'))
-        .pipe(gulp_plugins.buffer());
-    //.pipe(gulp_plugins.size({title:dest_file}));
+        .pipe(gulp.dest('./'));
+        //.pipe(gulp_plugins.buffer());
+        //.pipe(gulp_plugins.size({title:dest_file}));
     return bundler;
 }
 function do_bundle(bundle_pkg, browserify_cfg, src_add_method) {
@@ -229,7 +229,7 @@ var gulp_tasks = {
     },
     //编译sass到dist目录（包含bourbon插件）
     //css里使用image_url和font_url设置图片和字体相对路径
-    build_compass_sass: function () {
+    build_compass: function () {
         var fs = require('fs'),
             path = require('path'),
             import_path = gulp_config.compass.import_paths;
@@ -272,7 +272,6 @@ var gulp_tasks = {
                     // https://github.com/appleboy/gulp-compass
                     gulp.src(path.join(sass_path, '/**/*.scss'))
                         .pipe(gulp_plugins.plumber({errorHandler: standardErrorHandler}))
-
                         .pipe(gulp_plugins.compass({
                             project: project_path,
                             sass: sass_path,
@@ -284,8 +283,8 @@ var gulp_tasks = {
                             http_path: http_path,
                             style: gulp.env.production ? 'compressed' : 'expanded',
                             time: true
-                        }))
-                        .pipe(gulp.dest('./'));
+                        }));
+                        //.pipe(gulp.dest('./')); //不要加这个，否则直接在根目录输出了，compass本身已经配置好输出目录
                 }
 
                 callback(null, file);
@@ -294,10 +293,9 @@ var gulp_tasks = {
 
         return gulp.src(gulp_config.compass.src)
             .pipe(gulp_plugins.plumber({errorHandler: standardErrorHandler}))
-
             .pipe(generate_sass(gulp_config));
     },
-    //[Obsolete] 此方法已经过期，使用build_compass_sass
+    //[Obsolete] 此方法已经过期，使用build_compass
     build_sass: function () {
         return gulp.src(gulp_config.sass.src)
             .pipe(gulp_plugins.plumber({errorHandler: standardErrorHandler}))
@@ -433,7 +431,7 @@ var gulp_tasks = {
         };
 
         gulp.watch(watch_src_images_path, watch_opts, ['build:images']);
-        gulp.watch(watch_src_sass_path, watch_opts, ['build:compass_sass']);
+        gulp.watch(watch_src_sass_path, watch_opts, ['build:compass']);
         //gulp.watch(js_path, watch_opts, [ 'build:browserify', 'build:html']);
 
         watch_on = true;
@@ -452,7 +450,7 @@ gulp.task('build:browserify', gulp_tasks.build_browserify);
 gulp.task('build:html', gulp_tasks.build_html);
 gulp.task('build:umd', gulp_tasks.build_umd);
 gulp.task('build:sass', gulp_tasks.build_sass);
-gulp.task('build:compass_sass', gulp_tasks.build_compass_sass);
+gulp.task('build:compass', gulp_tasks.build_compass);
 gulp.task('build:css_min', gulp_tasks.build_css_min);
 gulp.task('build:css_sprite', gulp_tasks.build_css_sprite);
 gulp.task('build:images', gulp_tasks.build_images);
@@ -467,7 +465,7 @@ gulp.task('default', gulp_plugins.sync(gulp).sync([
         'build:images'
     ],
 
-    'build:compass_sass',
+    'build:compass',
     //'build:sass', 'build:css_min', //使用compass来编译sass、压缩css和处理相对路径问题
 
     'lint:jshint',
