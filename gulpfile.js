@@ -75,8 +75,8 @@ function bundle_action(bundler, dest_file) {
         //通过 vinyl-source-stream 传入输入文件名
         .pipe(vinylSource(dest_file))
         .pipe(gulp.dest('./'));
-        //.pipe(gulp_plugins.buffer());
-        //.pipe(gulp_plugins.size({title:dest_file}));
+    //.pipe(gulp_plugins.buffer());
+    //.pipe(gulp_plugins.size({title:dest_file}));
     return bundler;
 }
 function do_bundle(bundle_pkg, browserify_cfg, src_add_method) {
@@ -240,10 +240,12 @@ var gulp_tasks = {
         function generate_sass(gulp_config) {
             return through.obj(function (file, encoding, callback) {
 
-                var css_path, dist_path_root, project_path,
+                var css_path, css_src_path, dist_path_root, project_path,
                     img_path, font_path, stats,
                     sass_path = file.path,
                     http_path = gulp_config.compass.http_path;
+
+                css_src_path = path.join(path.dirname(sass_path), 'css');
 
                 stats = fs.statSync(sass_path);
                 if (stats.isDirectory()) {
@@ -275,7 +277,7 @@ var gulp_tasks = {
                         .pipe(gulp_plugins.compass({
                             project: project_path,
                             sass: sass_path,
-                            css: css_path,
+                            css:   css_path,
                             image: img_path,
                             font: font_path,
                             import_path: import_path,
@@ -283,8 +285,8 @@ var gulp_tasks = {
                             http_path: http_path,
                             style: gulp.env.production ? 'compressed' : 'expanded',
                             time: true
-                        }));
-                        //.pipe(gulp.dest('./')); //不要加这个，否则直接在根目录输出了，compass本身已经配置好输出目录
+                        }))
+                    .pipe(gulp.dest(css_src_path)); //同时在src文件夹出入css,方便browserify也能require css
                 }
 
                 callback(null, file);
@@ -456,7 +458,7 @@ gulp.task('build:css_sprite', gulp_tasks.build_css_sprite);
 gulp.task('build:images', gulp_tasks.build_images);
 gulp.task('copy:files', gulp_tasks.copy_files);
 
-gulp.task('watch',gulp_tasks.watch);
+gulp.task('watch', gulp_tasks.watch);
 
 gulp.task('default', gulp_plugins.sync(gulp).sync([
     [
