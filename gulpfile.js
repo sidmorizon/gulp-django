@@ -70,7 +70,9 @@ function browserifyErrorHandler(err) {
 }
 
 function bundle_action(bundler, dest_file) {
-    bundler.bundle()
+    bundler.bundle(function (err, src, map) {
+        // bundle callback
+    })
         .on('error', browserifyErrorHandler)
         //通过 vinyl-source-stream 传入输入文件名
         .pipe(vinylSource(dest_file))
@@ -88,7 +90,7 @@ function do_bundle(bundle_pkg, browserify_cfg, src_add_method) {
     var full_map_path = dest_file + '.map';
 
     bundler = new browserify({
-        debug: false,
+        debug: true,
         cache: {},
         packageCache: {},
         fullPaths: false,
@@ -133,11 +135,12 @@ function do_bundle(bundle_pkg, browserify_cfg, src_add_method) {
         bundler.external(ele);
     });
 
-
     // 开启压缩和source map     !gulp.env.production | process.env.NODE_ENV
     if (gulp.env.production) {
         console.log('Start minify for JS....');
-        bundler.plugin('minifyify', {output: full_map_path, map: path.basename(full_map_path)});// 需要 b.bundle(bundle_callback)或opt.output
+        bundler.plugin('bundle-collapser/plugin'); //压缩require里的模块路径 compress path in `require(_path_)`
+        bundler.plugin('minifyify'); //不输出source map
+        //bundler.plugin('minifyify', {output: full_map_path, map: path.basename(full_map_path)});// 需要 b.bundle(bundle_callback)或opt.output
     }
 
     return bundle_action(bundler, dest_file);
@@ -277,7 +280,7 @@ var gulp_tasks = {
                         .pipe(gulp_plugins.compass({
                             project: project_path,
                             sass: sass_path,
-                            css:   css_path,
+                            css: css_path,
                             image: img_path,
                             font: font_path,
                             import_path: import_path,
@@ -286,7 +289,7 @@ var gulp_tasks = {
                             style: gulp.env.production ? 'compressed' : 'expanded',
                             time: true
                         }))
-                    .pipe(gulp.dest(css_src_path)); //同时在src文件夹出入css,方便browserify也能require css
+                        .pipe(gulp.dest(css_src_path)); //同时在src文件夹出入css,方便browserify也能require css
                 }
 
                 callback(null, file);
