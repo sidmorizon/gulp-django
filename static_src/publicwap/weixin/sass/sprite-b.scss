@@ -1,0 +1,8 @@
+@import "compass/utilities/sprites";
+@import "../img/sprite/dezhou/*.png";
+@import "../img/sprite/weixin/*.png";
+
+
+@include all-dezhou-sprites(true);
+
+@include all-weixin-sprites(true);

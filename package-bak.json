@@ -1,0 +1,13 @@
+/**
+ * Created by zuozhuo on 10/23/14.
+ */
+
+
+//"browser": {
+//    "jquery": "./static/z/vendor/jquery-2.1.1.js",
+//        "inview": "./static/z/vendor/jquery.inview.js",
+//        "cy_base": "./static/z/src/_common/base/cy_base.js"
+//},
+//"browserify-shim": {
+//    "jquery": "$"
+//},

@@ -1,0 +1,39 @@
+.dezhou-sprite, .dezhou-a, .dezhou-b {
+  background-image: url('/static/dist/publicwap/weixin/img/../img/sprite/dezhou-sa1475171fb.png');
+  background-repeat: no-repeat;
+}
+
+.weixin-sprite, .weixin-aaa, .weixin-bbb, .weixin-ccc {
+  background-image: url('/static/dist/publicwap/weixin/img/../img/sprite/weixin-s068807209a.png');
+  background-repeat: no-repeat;
+}
+
+.dezhou-a {
+  background-position: 0 0;
+  height: 386px;
+  width: 458px;
+}
+
+.dezhou-b {
+  background-position: 0 -386px;
+  height: 80px;
+  width: 335px;
+}
+
+.weixin-aaa {
+  background-position: 0 0;
+  height: 1128px;
+  width: 1460px;
+}
+
+.weixin-bbb {
+  background-position: 0 -1128px;
+  height: 366px;
+  width: 278px;
+}
+
+.weixin-ccc {
+  background-position: 0 -1494px;
+  height: 150px;
+  width: 660px;
+}
