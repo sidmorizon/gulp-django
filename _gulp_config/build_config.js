@@ -57,7 +57,10 @@ config.copy_files = {
 // 所有的app入口js文件，用于browserify打包js
 config.browserify = {
     settings: {
-        load_paths: [ path.join(project_root, src_dir)],
+        load_paths: [
+            path.join(project_root, src_dir),
+            path.join(project_root, 'static')
+        ],
         transform: [
             //"browserify-shim",
             'cssify'
@@ -66,6 +69,10 @@ config.browserify = {
         external: []
     },
     vendors: {
+        'vendor_jquery_v1': {
+            src: ['jquery'],
+            dist: dist_dir + "/base/vendor_jquery_v1.js"
+        },
         'vendor_pack_v1': {
             src: ['jquery', '_common/base/cy_base.js'],
             dist: dist_dir + "/base/vendor_pack_v1.js"
@@ -73,8 +80,9 @@ config.browserify = {
     },
     apps: [
         {
-            "vendor": "vendor_pack_v1",
-            //"use_vendors":["",""]
+            "vendor": "vendor_jquery_v1",
+            //"use_vendors":["",""],
+            //"exclude":[],
             "src": [ src_dir + '/**/*.app.js' ],
             "dist_base": dist_dir
         }
