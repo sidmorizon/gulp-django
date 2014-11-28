@@ -41,8 +41,6 @@ function standardErrorHandler(err) {
 
     //发声
     gulp_plugins.util.beep();
-    gulp_plugins.util.beep();
-    gulp_plugins.util.beep();
 
     // Log to console
     gulp_plugins.util.log(gulp_plugins.util.colors.red('Error'), err.message);
@@ -72,6 +70,7 @@ function browserifyErrorHandler(err) {
 function bundle_action(bundler, dest_file) {
     bundler.bundle(function (err, src, map) {
         // bundle callback
+        //console.log(err);
     })
         .on('error', browserifyErrorHandler)
         //通过 vinyl-source-stream 传入输入文件名
@@ -90,7 +89,7 @@ function do_bundle(bundle_pkg, browserify_cfg, src_add_method) {
     var full_map_path = dest_file + '.map';
 
     bundler = new browserify({
-        debug: true,
+        debug: !!gulp.env.production,
         cache: {},
         packageCache: {},
         fullPaths: false,
